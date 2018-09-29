@@ -90,7 +90,10 @@ class App extends Component {
         <div className='divider mb-16' />
 
         <footer className='text-center'>
-          <a href='github.com/Elantris'><i class='fab fa-github' /> Elantris</a>
+          <a href='https://github.com/Elantris' target='_blank' without rel='noopener noreferrer'>
+            <i class='fab fa-github' />
+            Elantris
+          </a>
         </footer>
       </div>
     )
