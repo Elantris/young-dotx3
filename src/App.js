@@ -90,8 +90,9 @@ class App extends Component {
         <div className='divider mb-16' />
 
         <footer className='text-center'>
-          <a href='https://github.com/Elantris' target='_blank' without rel='noopener noreferrer'>
+          <a href='https://github.com/Elantris' target='_blank' rel='noopener noreferrer'>
             <i class='fab fa-github' />
+            {' '}
             Elantris
           </a>
         </footer>
