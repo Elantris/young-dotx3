@@ -1,4 +1,4 @@
 # Young Dotx3
-青春點點點 循環播放器
+青春點點點 錄音檔循環播放清單
 
-影片取自 YouTube [啤酒肥花](https://www.youtube.com/channel/UCxxUtGu7ABDdFAgifw-Zk6A) 頻道
+青春點點點是飛碟電台的深夜節目，雖然已經在 2017 年結束廣播，但仍然有不少聽眾為了回味兩位主持人在錄製節目中的談話內容而去找錄音檔來聽。[啤酒肥花](https://www.youtube.com/channel/UCxxUtGu7ABDdFAgifw-Zk6A) 剪輯了不少錄音檔放在 YouTube 上，這個網頁的功用是當影片結束後會自動播放清單中的下一部影片，不用在 YouTube 上手動將每一部影片加入播放清單中。

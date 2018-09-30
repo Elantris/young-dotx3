@@ -42,8 +42,7 @@ class App extends Component {
     return (
       <div className='App container'>
 
-        <h1>青春點點點 循環播放器</h1>
-        <p>YouTube <a href='https://www.youtube.com/channel/UCxxUtGu7ABDdFAgifw-Zk6A'>啤酒肥花</a> 剪輯</p>
+        <h1>青春點點點 錄音檔循環播放清單</h1>
 
         <div className='columns mb-16'>
           <div className='column col-5'>
