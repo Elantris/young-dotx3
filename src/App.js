@@ -7,26 +7,42 @@ class App extends Component {
   constructor (props) {
     super(props)
 
+    let saved = window.localStorage.getItem('saved')
+    if (!saved) {
+      saved = {
+        year: '2013',
+        videoIndex: 0
+      }
+      window.localStorage.setItem('saved', JSON.stringify(saved))
+    } else {
+      saved = JSON.parse(saved)
+    }
+
     this.state = {
-      year: '2013',
-      videoIndex: 0
+      year: saved.year,
+      videoIndex: saved.videoIndex
     }
   }
 
   handleSelectYear (year) {
     return event => {
-      this.setState({
+      let saved = {
         year,
         videoIndex: 0
-      })
+      }
+      window.localStorage.setItem('saved', JSON.stringify(saved))
+      this.setState(saved)
     }
   }
 
   handleSelectVideo (videoIndex) {
     return event => {
-      this.setState({
+      let saved = {
+        year: this.state.year,
         videoIndex
-      })
+      }
+      window.localStorage.setItem('saved', JSON.stringify(saved))
+      this.setState(saved)
     }
   }
 
@@ -90,7 +106,7 @@ class App extends Component {
 
         <footer className='text-center'>
           <a href='https://github.com/Elantris' target='_blank' rel='noopener noreferrer'>
-            <i class='fab fa-github' />
+            <i className='fab fa-github' />
             {' '}
             Elantris
           </a>
