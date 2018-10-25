@@ -3,54 +3,64 @@ import playlist from './playlist'
 import YouTubePlayer from './YouTubePlayer'
 import './App.css'
 
+const keywords = [
+  '2013',
+  '2014',
+  '2015',
+  '2016',
+  '2017',
+  '青春期五四三',
+  '馬克信箱'
+]
+
 class App extends Component {
   constructor (props) {
     super(props)
 
-    let saved = window.localStorage.getItem('saved')
-    if (!saved) {
-      saved = {
-        year: '2013',
-        videoIndex: 0
-      }
-      window.localStorage.setItem('saved', JSON.stringify(saved))
-    } else {
-      saved = JSON.parse(saved)
-    }
+    window.localStorage.clear()
 
     this.state = {
-      year: saved.year,
-      videoIndex: saved.videoIndex
+      searchText: '',
+      selectedVideo: playlist[0].id
     }
   }
 
-  handleSelectYear (year) {
+  handleChangeSearch () {
     return event => {
-      let saved = {
-        year,
-        videoIndex: 0
-      }
-      window.localStorage.setItem('saved', JSON.stringify(saved))
-      this.setState(saved)
+      this.setState({
+        searchText: event.target.value
+      })
     }
   }
 
-  handleSelectVideo (videoIndex) {
+  handleSelectKeyword (searchText) {
     return event => {
-      let saved = {
-        year: this.state.year,
-        videoIndex
-      }
-      window.localStorage.setItem('saved', JSON.stringify(saved))
-      this.setState(saved)
+      this.refs.inputSearch.value = searchText
+      this.setState({ searchText })
+    }
+  }
+
+  handleSelectVideo (videoId) {
+    return event => {
+      this.setState({ selectedVideo: videoId })
     }
   }
 
   playNext () {
     return () => {
-      this.setState({
-        videoIndex: (this.state.videoIndex + 1) % playlist[this.state.year].length
-      })
+      let list = []
+      if (this.state.searchText === '') {
+        list = playlist
+      } else {
+        list = playlist.filter(v => v.title.includes(this.state.searchText))
+      }
+      let videoIndex = list.findIndex(v => v.id === this.state.selectedVideo)
+      if (videoIndex !== -1) {
+        let nextVideoId = list[(videoIndex + 1) % list.length].id
+        this.setState({
+          selectedVideo: nextVideoId
+        })
+      }
     }
   }
 
@@ -62,18 +72,27 @@ class App extends Component {
 
         <div className='columns mb-16'>
           <div className='column col-5'>
-            <div className='btn-group btn-group-block'>
-              {Object.keys(playlist).map(v => (
-                <div
-                  key={`year-select-${v}`}
-                  className={`btn ${v === this.state.year ? 'active' : ''}`}
-                  onClick={this.handleSelectYear(v)}
-                >
-                  {v}
-                </div>
-              ))}
-            </div></div>
-          <div className='column col-7' />
+            <div className='form-group'>
+              <input
+                ref='inputSearch'
+                type='text'
+                className='form-input'
+                placeholder='Search'
+                onChange={this.handleChangeSearch()}
+              />
+            </div>
+          </div>
+          <div className='column col-7'>
+            {keywords.map((v, i) => (
+              <button
+                key={`keyword-${v}`}
+                className='btn mr-2'
+                onClick={this.handleSelectKeyword(v)}
+              >
+                {v}
+              </button>
+            ))}
+          </div>
         </div>
 
         <div className='divider mb-16' />
@@ -82,11 +101,13 @@ class App extends Component {
           <div className='column col-5'>
             <ul className='menu playlist'>
               <li className='divider' data-content='LINKS' />
-              {playlist[this.state.year].map((v, i) => (
-                <li key={`video-link-${v.id}`} className='menu-item'>
+              {playlist.map((v, i) => (
+                <li
+                  key={`video-link-${v.id}`}
+                  className={`menu-item ${this.state.searchText && !v.title.includes(this.state.searchText) ? 'd-hide' : ''}`}>
                   <a
-                    className={`c-hand ${i === this.state.videoIndex ? 'active' : ''}`}
-                    onClick={this.handleSelectVideo(i)}
+                    className={`c-hand ${v.id === this.state.selectedVideo ? 'active' : ''}`}
+                    onClick={this.handleSelectVideo(v.id)}
                   >
                     {v.title}
                   </a>
@@ -96,7 +117,7 @@ class App extends Component {
           </div>
           <div className='column col-7'>
             <YouTubePlayer
-              videoId={playlist[this.state.year][this.state.videoIndex].id}
+              videoId={this.state.selectedVideo}
               playNext={this.playNext()}
             />
           </div>

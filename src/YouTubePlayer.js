@@ -22,19 +22,18 @@ class YouTubePlayer extends Component {
         width: '640',
         videoId: this.props.videoId,
         playerVars: {
-          rel: '0'
+          rel: '0',
+          showinfo: '0'
         },
         events: {
-          'onStateChange': (event) => {
+          onStateChange: (event) => {
             if (event.data === window.YT.PlayerState.ENDED) {
               this.props.playNext()
             }
           }
         }
       })
-      this.setState({
-        player
-      })
+      this.setState({ player })
     }
   }
 
