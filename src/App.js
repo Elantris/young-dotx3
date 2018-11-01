@@ -10,7 +10,9 @@ const keywords = [
   '2016',
   '2017',
   '青春期五四三',
-  '馬克信箱'
+  '馬克信箱',
+  '青春大學',
+  '青春影城'
 ]
 
 class App extends Component {
@@ -42,7 +44,9 @@ class App extends Component {
 
   handleSelectVideo (videoId) {
     return event => {
-      this.setState({ selectedVideo: videoId })
+      this.setState({
+        selectedVideo: videoId
+      })
     }
   }
 
@@ -71,8 +75,8 @@ class App extends Component {
         <h1>青春點點點 錄音檔循環播放清單</h1>
 
         <div className='columns mb-16'>
-          <div className='column col-5'>
-            <div className='form-group'>
+          <div className='column col-5 col-lg-12'>
+            <div className='form-group mb-16'>
               <input
                 ref='inputSearch'
                 type='text'
@@ -82,7 +86,7 @@ class App extends Component {
               />
             </div>
           </div>
-          <div className='column col-7'>
+          <div className='column col-7 col-lg-12'>
             {keywords.map((v, i) => (
               <button
                 key={`keyword-${v}`}
@@ -98,8 +102,8 @@ class App extends Component {
         <div className='divider mb-16' />
 
         <div className='columns mb-16'>
-          <div className='column col-5'>
-            <ul className='menu playlist'>
+          <div className='column col-5 col-lg-12'>
+            <ul className='menu playlist mb-16'>
               <li className='divider' data-content='LINKS' />
               {playlist.map((v, i) => (
                 <li
@@ -115,7 +119,7 @@ class App extends Component {
               ))}
             </ul>
           </div>
-          <div className='column col-7'>
+          <div className='column col-7 col-lg-12'>
             <YouTubePlayer
               videoId={this.state.selectedVideo}
               playNext={this.playNext()}

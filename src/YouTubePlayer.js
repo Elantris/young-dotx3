@@ -15,7 +15,7 @@ class YouTubePlayer extends Component {
     let firstScriptTag = document.getElementsByTagName('script')[0]
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
 
-    let player
+    let player = {}
     window.onYouTubeIframeAPIReady = () => {
       player = new window.YT.Player('player', {
         height: '390',
