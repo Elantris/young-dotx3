@@ -45,7 +45,7 @@ class YouTubePlayer extends Component {
 
   render () {
     return (
-      <div className='YouTubePlayer text-right'>
+      <div className='YouTubePlayer'>
         <div id='player' />
       </div>
     )

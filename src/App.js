@@ -4,15 +4,11 @@ import YouTubePlayer from './YouTubePlayer'
 import './App.css'
 
 const keywords = [
-  '2013',
-  '2014',
-  '2015',
-  '2016',
-  '2017',
   '青春期五四三',
   '馬克信箱',
   '青春大學',
-  '青春影城'
+  '青春影城',
+  'MM音樂教室'
 ]
 
 class App extends Component {
@@ -108,7 +104,8 @@ class App extends Component {
               {playlist.map((v, i) => (
                 <li
                   key={`video-link-${v.id}`}
-                  className={`menu-item ${this.state.searchText && !v.title.includes(this.state.searchText) ? 'd-hide' : ''}`}>
+                  className={`menu-item ${this.state.searchText && !v.title.includes(this.state.searchText) ? 'd-hide' : ''}`}
+                >
                   <a
                     className={`c-hand ${v.id === this.state.selectedVideo ? 'active' : ''}`}
                     onClick={this.handleSelectVideo(v.id)}
